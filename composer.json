@@ -1,0 +1,24 @@
+{
+    "name": "congregationhub/themes",
+    "description": "Blade theme components for Congregation Hub websites",
+    "type": "library",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "CongregationHub\\Themes\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CongregationHub\\Themes\\CongregationHubThemesServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
