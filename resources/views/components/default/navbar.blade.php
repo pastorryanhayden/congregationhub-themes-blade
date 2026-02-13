@@ -7,10 +7,12 @@
     'showGospel' => false,
     'showDoctrine' => false,
     'showConstitution' => false,
+    'showLeadership' => false,
     'transparent' => false,
     'aboutUsPages' => [],
     'resourcesPages' => [],
     'hasBlogPosts' => false,
+    'documentLinks' => [],
 ])
 
 @php
@@ -23,7 +25,7 @@
     <nav class="flex gap-x-6 justify-between items-center p-6 mx-auto max-w-7xl lg:px-8" aria-label="Global">
         {{-- Logo --}}
         <div class="flex lg:flex-1">
-            <a href="#" class="flex items-center gap-2 p-1.5 -m-1.5">
+            <a href="/" class="flex items-center gap-2 p-1.5 -m-1.5">
                 @if($navLogo)
                     <img src="{{ $navLogo }}" alt="{{ $siteName }}" class="w-auto h-8" />
                 @endif
@@ -34,11 +36,12 @@
         {{-- Desktop nav links --}}
         <div class="hidden lg:flex lg:gap-x-12 font-sans {{ $transparent ? 'text-white' : '' }}">
             {{-- About Us dropdown --}}
-            <div class="relative" @mouseenter="showAboutMenu = true" @mouseleave="showAboutMenu = false">
+            <div class="relative" @click.outside="showAboutMenu = false">
                 <button type="button"
+                    @click="showAboutMenu = !showAboutMenu; showResourcesMenu = false"
                     class="flex items-center gap-x-1 text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : '' }}">
                     About Us
-                    <svg class="flex-none w-5 h-5 text-base-content/40" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <svg class="flex-none w-5 h-5 text-base-content/40 transition-transform" :class="showAboutMenu && 'rotate-180'" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                     </svg>
                 </button>
@@ -50,49 +53,65 @@
                             <div class="flex relative gap-x-6 p-4 rounded-lg hover:bg-base-200 group">
                                 <div class="flex flex-none justify-center items-center mt-1 w-11 h-11 bg-base-200 rounded-lg group-hover:bg-base-100">
                                     <svg class="w-6 h-6 text-base-content/60 group-hover:text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <a href="#" class="font-semibold text-base-content">
-                                        Start Here
+                                    <a href="/about" class="font-semibold text-base-content">
+                                        Plan Your Visit
                                         <span class="absolute inset-0"></span>
                                     </a>
-                                    <p class="mt-1 text-base-content/60">Essential information to know before visiting our church.</p>
+                                    <p class="mt-1 text-base-content/60">Everything you need to know before visiting.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="p-8 bg-base-200">
-                            <div class="flex justify-between">
-                                <h3 class="text-sm font-semibold leading-6 text-base-content/50">Other Information</h3>
-                                <a href="#" class="text-sm font-semibold leading-6 text-primary">See all <span aria-hidden="true">&rarr;</span></a>
-                            </div>
-                            <ul role="list" class="mt-6 space-y-6">
-                                @if($showDoctrine)
+                            <ul role="list" class="space-y-6">
+                                @if($showLeadership)
                                     <li class="relative">
-                                        <a href="#" class="block text-sm font-semibold leading-6 text-base-content truncate">
-                                            What We Believe<span class="absolute inset-0"></span>
-                                        </a>
-                                    </li>
-                                @endif
-                                @if($showConstitution)
-                                    <li class="relative">
-                                        <a href="#" class="block text-sm font-semibold leading-6 text-base-content truncate">
-                                            Constitution &amp; Bylaws<span class="absolute inset-0"></span>
+                                        <a href="/leadership" class="block text-sm font-semibold leading-6 text-base-content truncate">
+                                            Leadership<span class="absolute inset-0"></span>
                                         </a>
                                     </li>
                                 @endif
                                 @if($showGospel)
                                     <li class="relative">
-                                        <a href="#" class="block text-sm font-semibold leading-6 text-base-content truncate">
-                                            The Gospel<span class="absolute inset-0"></span>
+                                        <a href="{{ $documentLinks['gospel'] ?? '/gospel' }}" {{ isset($documentLinks['gospel']) ? 'target="_blank" rel="noopener"' : '' }} class="block text-sm font-semibold leading-6 text-base-content truncate">
+                                            The Gospel
+                                            @if(isset($documentLinks['gospel']))
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-3.5 h-3.5 ml-1 -mt-0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                            @endif
+                                            <span class="absolute inset-0"></span>
+                                        </a>
+                                    </li>
+                                @endif
+                                @if($showDoctrine)
+                                    <li class="relative">
+                                        <a href="{{ $documentLinks['doctrine'] ?? '/doctrine' }}" {{ isset($documentLinks['doctrine']) ? 'target="_blank" rel="noopener"' : '' }} class="block text-sm font-semibold leading-6 text-base-content truncate">
+                                            Statement of Faith
+                                            @if(isset($documentLinks['doctrine']))
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-3.5 h-3.5 ml-1 -mt-0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                            @endif
+                                            <span class="absolute inset-0"></span>
+                                        </a>
+                                    </li>
+                                @endif
+                                @if($showConstitution)
+                                    <li class="relative">
+                                        <a href="{{ $documentLinks['constitution'] ?? '/constitution' }}" {{ isset($documentLinks['constitution']) ? 'target="_blank" rel="noopener"' : '' }} class="block text-sm font-semibold leading-6 text-base-content truncate">
+                                            Constitution &amp; Bylaws
+                                            @if(isset($documentLinks['constitution']))
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-3.5 h-3.5 ml-1 -mt-0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                            @endif
+                                            <span class="absolute inset-0"></span>
                                         </a>
                                     </li>
                                 @endif
                                 @foreach($aboutUsPages as $page)
                                     <li class="relative">
-                                        <a href="#" class="block text-sm font-semibold leading-6 text-base-content truncate">
-                                            {{ $page['title'] ?? '' }}<span class="absolute inset-0"></span>
+                                        <a href="{{ $page['url'] ?? '#' }}" class="block text-sm font-semibold leading-6 text-base-content truncate">
+                                            {{ $page['label'] ?? $page['title'] ?? '' }}<span class="absolute inset-0"></span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -102,23 +121,24 @@
                 </div>
             </div>
 
-            {{-- Ministries --}}
-            @if($showMinistries)
-                <a href="#" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Ministries</a>
-            @endif
-
             {{-- Events --}}
             @if($showEvents)
-                <a href="#" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Upcoming Events</a>
+                <a href="/events" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Events</a>
+            @endif
+
+            {{-- Ministries --}}
+            @if($showMinistries)
+                <a href="/ministries" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Ministries</a>
             @endif
 
             {{-- Resources dropdown (if multiple) --}}
             @if($hasMultipleResources)
-                <div class="relative" @mouseenter="showResourcesMenu = true" @mouseleave="showResourcesMenu = false">
+                <div class="relative" @click.outside="showResourcesMenu = false">
                     <button type="button"
+                        @click="showResourcesMenu = !showResourcesMenu; showAboutMenu = false"
                         class="flex items-center gap-x-1 text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : '' }}">
                         Resources
-                        <svg class="flex-none w-5 h-5 text-base-content/40" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <svg class="flex-none w-5 h-5 text-base-content/40 transition-transform" :class="showResourcesMenu && 'rotate-180'" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                         </svg>
                     </button>
@@ -134,7 +154,7 @@
                                         </svg>
                                     </div>
                                     <div class="flex-auto">
-                                        <a href="#" class="block font-semibold text-base-content">Sermons<span class="absolute inset-0"></span></a>
+                                        <a href="/sermons" class="block font-semibold text-base-content">Sermons<span class="absolute inset-0"></span></a>
                                         <p class="mt-1 text-base-content/60">Listen to our sermons</p>
                                     </div>
                                 </div>
@@ -147,7 +167,7 @@
                                         </svg>
                                     </div>
                                     <div class="flex-auto">
-                                        <a href="#" class="block font-semibold text-base-content">Articles<span class="absolute inset-0"></span></a>
+                                        <a href="/blog" class="block font-semibold text-base-content">Articles<span class="absolute inset-0"></span></a>
                                         <p class="mt-1 text-base-content/60">Articles from our pastor and staff</p>
                                     </div>
                                 </div>
@@ -160,7 +180,7 @@
                                         </svg>
                                     </div>
                                     <div class="flex-auto">
-                                        <a href="#" class="block font-semibold text-base-content">{{ $page['title'] ?? '' }}<span class="absolute inset-0"></span></a>
+                                        <a href="{{ $page['url'] ?? '#' }}" class="block font-semibold text-base-content">{{ $page['label'] ?? $page['title'] ?? '' }}<span class="absolute inset-0"></span></a>
                                     </div>
                                 </div>
                             @endforeach
@@ -170,13 +190,13 @@
             @else
                 {{-- Flat links (if only one resource type) --}}
                 @if($showSermons)
-                    <a href="#" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Sermons</a>
+                    <a href="/sermons" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Sermons</a>
                 @endif
                 @if($hasBlogPosts)
-                    <a href="#" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Articles</a>
+                    <a href="/blog" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">Articles</a>
                 @endif
                 @foreach($resourcesPages as $page)
-                    <a href="#" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">{{ $page['title'] ?? '' }}</a>
+                    <a href="{{ $page['url'] ?? '#' }}" class="text-sm font-semibold leading-6 {{ $transparent ? 'text-white' : 'text-base-content' }}">{{ $page['label'] ?? $page['title'] ?? '' }}</a>
                 @endforeach
             @endif
         </div>
@@ -209,33 +229,51 @@
             <div class="flow-root mt-6">
                 <div class="-my-6 divide-y divide-base-content/10">
                     <div class="py-6 space-y-2 font-sans">
-                        <a href="#" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">About Us</a>
-                        @if($showDoctrine)
-                            <a href="#" class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">What We Believe</a>
-                        @endif
-                        @if($showConstitution)
-                            <a href="#" class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">Constitution &amp; Bylaws</a>
+                        <a href="/about" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Plan Your Visit</a>
+                        @if($showLeadership)
+                            <a href="/leadership" class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">Leadership</a>
                         @endif
                         @if($showGospel)
-                            <a href="#" class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">The Gospel</a>
+                            <a href="{{ $documentLinks['gospel'] ?? '/gospel' }}" {{ isset($documentLinks['gospel']) ? 'target="_blank" rel="noopener"' : '' }} class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">
+                                The Gospel
+                                @if(isset($documentLinks['gospel']))
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-4 h-4 ml-1 -mt-0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                @endif
+                            </a>
+                        @endif
+                        @if($showDoctrine)
+                            <a href="{{ $documentLinks['doctrine'] ?? '/doctrine' }}" {{ isset($documentLinks['doctrine']) ? 'target="_blank" rel="noopener"' : '' }} class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">
+                                Statement of Faith
+                                @if(isset($documentLinks['doctrine']))
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-4 h-4 ml-1 -mt-0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                @endif
+                            </a>
+                        @endif
+                        @if($showConstitution)
+                            <a href="{{ $documentLinks['constitution'] ?? '/constitution' }}" {{ isset($documentLinks['constitution']) ? 'target="_blank" rel="noopener"' : '' }} class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">
+                                Constitution &amp; Bylaws
+                                @if(isset($documentLinks['constitution']))
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-4 h-4 ml-1 -mt-0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                @endif
+                            </a>
                         @endif
                         @foreach($aboutUsPages as $page)
-                            <a href="#" class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">{{ $page['title'] ?? '' }}</a>
+                            <a href="{{ $page['url'] ?? '#' }}" class="block py-2 px-8 -mx-3 text-base font-semibold leading-7 text-base-content/60 rounded-lg hover:bg-base-200">{{ $page['label'] ?? $page['title'] ?? '' }}</a>
                         @endforeach
-                        @if($showMinistries)
-                            <a href="#" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Ministries</a>
-                        @endif
                         @if($showEvents)
-                            <a href="#" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Upcoming Events</a>
+                            <a href="/events" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Events</a>
+                        @endif
+                        @if($showMinistries)
+                            <a href="/ministries" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Ministries</a>
                         @endif
                         @if($showSermons)
-                            <a href="#" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Sermons</a>
+                            <a href="/sermons" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Sermons</a>
                         @endif
                         @if($hasBlogPosts)
-                            <a href="#" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Articles</a>
+                            <a href="/blog" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">Articles</a>
                         @endif
                         @foreach($resourcesPages as $page)
-                            <a href="#" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">{{ $page['title'] ?? '' }}</a>
+                            <a href="{{ $page['url'] ?? '#' }}" class="block py-2 px-3 -mx-3 text-base font-semibold leading-7 text-base-content rounded-lg hover:bg-base-200">{{ $page['label'] ?? $page['title'] ?? '' }}</a>
                         @endforeach
                     </div>
                 </div>
