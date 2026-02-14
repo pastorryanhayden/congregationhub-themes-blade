@@ -6,7 +6,7 @@
 @if($showMinistries && count($ministries) > 0)
     <div class="bg-neutral text-neutral-content w-full text-center pt-8 px-8">
         <h2 class="font-sans uppercase font-bold text-3xl mb-4">Something for You and Your Family</h2>
-        <a class="mb-4 inline-flex items-center" href="#">
+        <a class="mb-4 inline-flex items-center" href="/ministries">
             See All Ministries
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 inline ml-1">
                 <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
@@ -29,7 +29,7 @@
                     <div class="bg-base-100 text-base-content w-1/2 flex flex-col items-start justify-center p-4 text-left hover:bg-base-200">
                         <h4 class="font-sans text-base-content/40 uppercase">{{ $ministry['for'] ?? '' }}</h4>
                         <h3 class="font-sans font-bold text-2xl text-base-content/70">{{ $ministry['name'] ?? '' }}</h3>
-                        <a class="uppercase font-sans text-base-content/40 inline-flex items-center" href="#">
+                        <a class="uppercase font-sans text-base-content/40 inline-flex items-center" href="{{ $ministry['url'] ?? '#' }}">
                             Learn More
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 inline ml-1">
                                 <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
