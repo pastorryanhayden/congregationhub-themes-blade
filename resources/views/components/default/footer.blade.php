@@ -1,5 +1,6 @@
 @props([
     'siteName' => 'Your Church',
+    'navLogoLight' => null,
     'footerAbout' => 'Building community together.',
     'churchAddress' => '123 Main Street',
     'mailingAddress' => '',
@@ -35,7 +36,11 @@
         <div class="grid w-full md:grid-cols-2 lg:grid-cols-4 gap-6 px-8">
             {{-- Column 1: Church info --}}
             <article>
-                <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ $siteName }}</h3>
+                @if($navLogoLight)
+                    <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="h-8 mb-3" />
+                @else
+                    <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ $siteName }}</h3>
+                @endif
                 <div class="text-sm font-sans">{!! $footerAbout !!}</div>
             </article>
 
