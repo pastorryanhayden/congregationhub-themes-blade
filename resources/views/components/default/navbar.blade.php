@@ -1,6 +1,7 @@
 @props([
     'siteName' => 'Your Church',
-    'navLogo' => null,
+    'navLogoLight' => null,
+    'navLogoDark' => null,
     'showMinistries' => false,
     'showEvents' => false,
     'showSermons' => false,
@@ -18,6 +19,7 @@
 @php
     $resourceCount = ($showSermons ? 1 : 0) + ($hasBlogPosts ? 1 : 0) + count($resourcesPages);
     $hasMultipleResources = $resourceCount > 1;
+    $activeLogo = $transparent ? $navLogoLight : $navLogoDark;
 @endphp
 
 <header class="{{ $transparent ? 'absolute inset-x-0 top-0 z-50' : 'bg-base-100' }}"
@@ -26,10 +28,11 @@
         {{-- Logo --}}
         <div class="flex lg:flex-1">
             <a href="/" class="flex items-center gap-2 p-1.5 -m-1.5">
-                @if($navLogo)
-                    <img src="{{ $navLogo }}" alt="{{ $siteName }}" class="w-auto h-8" />
+                @if($activeLogo)
+                    <img src="{{ $activeLogo }}" alt="{{ $siteName }}" class="w-auto h-8" />
+                @else
+                    <span class="text-lg font-semibold uppercase {{ $transparent ? 'text-white' : '' }}">{{ $siteName }}</span>
                 @endif
-                <span class="text-lg font-semibold uppercase {{ $transparent ? 'text-white' : '' }}">{{ $siteName }}</span>
             </a>
         </div>
 
