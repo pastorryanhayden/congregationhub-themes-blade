@@ -32,7 +32,7 @@
                 </div>
 
                 @if(!empty($s['description']))
-                    <p class="text-lg text-base-content/70 mb-4">{{ $s['description'] }}</p>
+                    <p class="text-lg text-base-content/70 mb-4">{{ strip_tags($s['description']) }}</p>
                 @endif
 
                 <div class="flex flex-wrap gap-4 text-sm text-base-content/60">

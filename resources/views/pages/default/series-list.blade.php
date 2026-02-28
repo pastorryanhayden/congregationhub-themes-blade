@@ -45,7 +45,7 @@
                                     @endif
                                 </h2>
                                 @if(!empty($s['description']))
-                                    <p class="text-base-content/70">{{ Str::limit($s['description'], 120) }}</p>
+                                    <p class="text-base-content/70">{{ Str::limit(strip_tags($s['description']), 120) }}</p>
                                 @endif
                                 <div class="flex items-center justify-between mt-2 text-sm text-base-content/60">
                                     <span>{{ $s['sermonCount'] ?? 0 }} {{ Str::plural('sermon', $s['sermonCount'] ?? 0) }}</span>
