@@ -15,6 +15,7 @@
 
         @include('themes::components.default.breadcrumb', [
             'parent' => 'Pages',
+            'parentUrl' => '/',
             'current' => $title,
         ])
 

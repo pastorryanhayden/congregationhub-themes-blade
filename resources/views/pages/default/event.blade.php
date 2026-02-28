@@ -19,6 +19,7 @@
 
         @include('themes::components.default.breadcrumb', [
             'parent' => 'Events',
+            'parentUrl' => '/events',
             'current' => $title,
         ])
 

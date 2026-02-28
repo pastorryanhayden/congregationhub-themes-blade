@@ -19,6 +19,7 @@
 
         @include('themes::components.default.breadcrumb', [
             'parent' => 'Speakers',
+            'parentUrl' => '/sermons/speakers',
             'current' => $name,
         ])
 

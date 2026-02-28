@@ -17,6 +17,7 @@
 
         @include('themes::components.default.breadcrumb', [
             'parent' => 'Blog',
+            'parentUrl' => '/blog',
             'current' => $title,
         ])
 

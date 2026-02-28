@@ -15,6 +15,7 @@
 
         @include('themes::components.default.breadcrumb', [
             'parent' => 'Sermon Series',
+            'parentUrl' => '/sermons/series',
             'current' => $title,
         ])
 
