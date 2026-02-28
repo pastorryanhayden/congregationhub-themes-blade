@@ -12,7 +12,7 @@
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="sm:flex sm:items-baseline sm:justify-between">
                 <h2 class="text-2xl font-bold tracking-tight text-base-content">Featured Series</h2>
-                <a href="#" class="hidden text-sm font-semibold text-base-content/60 hover:text-primary sm:block">
+                <a href="/sermons/series" class="hidden text-sm font-semibold text-base-content/60 hover:text-primary sm:block">
                     View All Series
                     <span aria-hidden="true"> &rarr;</span>
                 </a>
@@ -30,10 +30,10 @@
                             <div class="flex items-end p-6 absolute inset-0">
                                 <div>
                                     <h3 class="font-semibold text-white text-lg">
-                                        <a href="#"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
+                                        <a href="{{ $single['url'] ?? '#' }}"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
                                     </h3>
                                     @if(!empty($single['description']))
-                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ $single['description'] }}</p>
+                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ strip_tags($single['description']) }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -48,10 +48,10 @@
                             <div class="flex items-end p-6 absolute inset-0">
                                 <div>
                                     <h3 class="font-semibold text-white text-lg">
-                                        <a href="#"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
+                                        <a href="{{ $single['url'] ?? '#' }}"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
                                     </h3>
                                     @if(!empty($single['description']))
-                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ $single['description'] }}</p>
+                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ strip_tags($single['description']) }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -66,10 +66,10 @@
                             <div class="flex items-end p-6 absolute inset-0">
                                 <div>
                                     <h3 class="font-semibold text-white text-lg">
-                                        <a href="#"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
+                                        <a href="{{ $single['url'] ?? '#' }}"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
                                     </h3>
                                     @if(!empty($single['description']))
-                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ $single['description'] }}</p>
+                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ strip_tags($single['description']) }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -84,10 +84,10 @@
                             <div class="flex items-end p-6 absolute inset-0">
                                 <div>
                                     <h3 class="font-semibold text-white text-lg">
-                                        <a href="#"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
+                                        <a href="{{ $single['url'] ?? '#' }}"><span class="absolute inset-0"></span>{{ $single['title'] ?? '' }}</a>
                                     </h3>
                                     @if(!empty($single['description']))
-                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ $single['description'] }}</p>
+                                        <p aria-hidden="true" class="mt-1 text-sm text-white">{{ strip_tags($single['description']) }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
             </div>
 
             <div class="mt-6 sm:hidden">
-                <a href="#" class="block text-sm font-semibold text-base-content/60 hover:text-base-content/50">
+                <a href="/sermons/series" class="block text-sm font-semibold text-base-content/60 hover:text-base-content/50">
                     Browse all sermon series
                     <span aria-hidden="true"> &rarr;</span>
                 </a>
