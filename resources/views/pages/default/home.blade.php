@@ -46,5 +46,6 @@
         'youtubeUrl' => $youtubeUrl ?? '',
         'facebookUrl' => $facebookUrl ?? '',
         'instagramUrl' => $instagramUrl ?? '',
+        'navLogoLight' => $navLogoLight ?? null,
     ])
 </div>

@@ -9,13 +9,13 @@
 
 @if($showEvents && $event)
     <div>
-        <div class="w-full bg-base-content/60 p-12 flex flex-col justify-center items-center">
-            <a href="#"><h2 class="text-white font-serif text-3xl">{{ $event['title'] ?? '' }}</h2></a>
-            <p class="text-white/70 font-sans text-lg mt-2">{{ $event['date'] ?? '' }}</p>
+        <div class="w-full bg-neutral text-neutral-content p-12 flex flex-col justify-center items-center">
+            <a href="#"><h2 class="text-neutral-content font-serif text-3xl">{{ $event['title'] ?? '' }}</h2></a>
+            <p class="text-neutral-content/70 font-sans text-lg mt-2">{{ $event['date'] ?? '' }}</p>
             @if(!empty($event['image']))
-                <a href="#"><img class="w-96 mt-4 border border-base-content/80" src="{{ $event['image'] }}" alt="{{ $event['title'] ?? '' }}" /></a>
+                <a href="#"><img class="w-96 mt-4 border border-neutral-content/20 rounded-lg" src="{{ $event['image'] }}" alt="{{ $event['title'] ?? '' }}" /></a>
             @endif
-            <a href="#" class="mt-4 text-white/80 underline">Learn More</a>
+            <a href="#" class="mt-4 text-neutral-content/80 underline">Learn More</a>
         </div>
     </div>
 @endif

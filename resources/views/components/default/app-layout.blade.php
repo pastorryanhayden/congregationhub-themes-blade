@@ -1,6 +1,7 @@
 @props([
     'siteName' => 'Your Church',
-    'navLogo' => null,
+    'navLogoLight' => null,
+    'navLogoDark' => null,
     'showMinistries' => false,
     'showEvents' => false,
     'showSermons' => false,
@@ -26,7 +27,8 @@
 <div class="min-h-screen bg-base-100" data-theme="corporate">
     @include('themes::components.default.navbar', [
         'siteName' => $siteName,
-        'navLogo' => $navLogo,
+        'navLogoLight' => $navLogoLight,
+        'navLogoDark' => $navLogoDark,
         'showMinistries' => $showMinistries,
         'showEvents' => $showEvents,
         'showSermons' => $showSermons,
@@ -56,5 +58,6 @@
         'youtubeUrl' => $youtubeUrl,
         'facebookUrl' => $facebookUrl,
         'instagramUrl' => $instagramUrl,
+        'navLogoLight' => $navLogoLight,
     ])
 </div>

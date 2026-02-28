@@ -1,6 +1,7 @@
 @props([
     'siteName' => 'Your Church',
-    'navLogo' => null,
+    'navLogoLight' => null,
+    'navLogoDark' => null,
     'showMinistries' => false,
     'showEvents' => false,
     'showSermons' => false,
@@ -26,10 +27,14 @@
         {{-- Logo --}}
         <div class="flex lg:flex-1">
             <a href="/" class="flex items-center gap-2 p-1.5 -m-1.5">
-                @if($navLogo)
-                    <img src="{{ $navLogo }}" alt="{{ $siteName }}" class="w-auto h-8" />
+                @if($transparent && $navLogoLight)
+                    <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="w-auto h-8" />
+                @elseif(!$transparent && $navLogoDark)
+                    <img src="{{ $navLogoDark }}" alt="{{ $siteName }}" class="w-auto h-8" />
                 @endif
-                <span class="text-lg font-semibold uppercase {{ $transparent ? 'text-white' : '' }}">{{ $siteName }}</span>
+                @if($transparent ? !$navLogoLight : !$navLogoDark)
+                    <span class="text-lg font-semibold uppercase {{ $transparent ? 'text-white' : '' }}">{{ $siteName }}</span>
+                @endif
             </a>
         </div>
 

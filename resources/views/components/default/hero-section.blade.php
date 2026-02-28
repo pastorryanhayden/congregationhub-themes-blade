@@ -1,6 +1,6 @@
 @props([
     'heading' => 'Welcome',
-    'headerImage' => 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920&q=80',
+    'headerImage' => 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80',
     'headerVideo' => null,
 ])
 
@@ -32,7 +32,7 @@
     {{-- Content --}}
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
         <div class="text-center">
-            <h1 class="text-3xl font-bold tracking-tight text-white sm:text-6xl">
+            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
                 {{ $heading }}
             </h1>
         </div>

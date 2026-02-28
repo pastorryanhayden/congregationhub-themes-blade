@@ -14,19 +14,19 @@
 
     <main>
         {{-- Dark Hero Section --}}
-        <div class="relative isolate overflow-hidden bg-gray-900">
+        <div class="relative isolate overflow-hidden bg-neutral">
             @if($image)
                 <img src="{{ $image }}" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
-                <div class="absolute inset-0 -z-10 bg-gray-700 opacity-80"></div>
+                <div class="absolute inset-0 -z-10 bg-neutral opacity-80"></div>
             @else
-                <div class="absolute inset-0 -z-10 bg-gradient-to-br from-gray-900 to-gray-800"></div>
+                <div class="absolute inset-0 -z-10 bg-gradient-to-br from-neutral to-neutral/90"></div>
             @endif
 
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
                 <div class="max-w-2xl">
-                    <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">{{ $heading }}</h1>
+                    <h1 class="text-4xl font-bold tracking-tight text-neutral-content sm:text-6xl">{{ $heading }}</h1>
                     @if($subheading)
-                        <p class="mt-6 text-lg leading-8 text-gray-300">{{ $subheading }}</p>
+                        <p class="mt-6 text-lg leading-8 text-neutral-content/70">{{ $subheading }}</p>
                     @endif
                 </div>
 
@@ -36,13 +36,13 @@
                             <a href="#{{ slugify($section['title'] ?? '') }}"
                                class="group rounded-xl bg-white/5 p-6 ring-1 ring-white/10 hover:bg-white/10 transition">
                                 @if(!empty($section['icon']))
-                                    <div class="mb-4 text-gray-400 group-hover:text-white transition">
+                                    <div class="mb-4 text-neutral-content/60 group-hover:text-neutral-content transition">
                                         <i class="{{ $section['icon'] }}" style="font-size: 32px;"></i>
                                     </div>
                                 @endif
-                                <h3 class="text-lg font-semibold text-white">{{ $section['title'] ?? '' }}</h3>
+                                <h3 class="text-lg font-semibold text-neutral-content">{{ $section['title'] ?? '' }}</h3>
                                 @if(!empty($section['description']))
-                                    <p class="mt-2 text-sm text-gray-400">{{ $section['description'] }}</p>
+                                    <p class="mt-2 text-sm text-neutral-content/60">{{ $section['description'] }}</p>
                                 @endif
                             </a>
                         @endforeach
@@ -52,27 +52,27 @@
         </div>
 
         {{-- Content Sections --}}
-        <div class="bg-white">
+        <div class="bg-base-100">
             @if(count($sections) === 0)
                 <div class="py-24 text-center">
-                    <p class="text-gray-400">Add sections to tell your church's story.</p>
+                    <p class="text-base-content/40">Add sections to tell your church's story.</p>
                 </div>
             @else
                 @foreach($sections as $index => $section)
                     <div id="{{ slugify($section['title'] ?? '') }}">
                         <div class="mx-auto max-w-3xl px-6 py-16 lg:py-24">
                             @if(!empty($section['title']))
-                                <p class="text-sm font-medium uppercase tracking-wider text-gray-400">{{ $section['title'] }}</p>
+                                <p class="text-sm font-medium uppercase tracking-wider text-base-content/40">{{ $section['title'] }}</p>
                             @endif
                             @if(!empty($section['section_heading']))
-                                <h2 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ $section['section_heading'] }}</h2>
+                                <h2 class="mt-2 text-3xl font-bold tracking-tight text-base-content sm:text-4xl">{{ $section['section_heading'] }}</h2>
                             @endif
                             @if(!empty($section['content']))
-                                <div class="mt-8 prose prose-lg max-w-none text-gray-600">{!! $section['content'] !!}</div>
+                                <div class="mt-8 prose prose-lg max-w-none text-base-content/70">{!! $section['content'] !!}</div>
                             @endif
                         </div>
                         @if($index < count($sections) - 1)
-                            <hr class="border-gray-200 mx-auto max-w-3xl" />
+                            <hr class="border-base-300 mx-auto max-w-3xl" />
                         @endif
                     </div>
                 @endforeach

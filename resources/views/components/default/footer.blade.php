@@ -9,6 +9,7 @@
     'youtubeUrl' => '',
     'facebookUrl' => '',
     'instagramUrl' => '',
+    'navLogoLight' => null,
 ])
 
 @php
@@ -35,7 +36,11 @@
         <div class="grid w-full md:grid-cols-2 lg:grid-cols-4 gap-6 px-8">
             {{-- Column 1: Church info --}}
             <article>
-                <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ $siteName }}</h3>
+                @if($navLogoLight)
+                    <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="w-auto h-10 mb-2" />
+                @else
+                    <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ $siteName }}</h3>
+                @endif
                 <div class="text-sm font-sans">{!! $footerAbout !!}</div>
             </article>
 

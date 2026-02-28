@@ -24,7 +24,7 @@
             @if($content)
                 <div class="prose prose-lg max-w-none">{!! $content !!}</div>
             @else
-                <div class="text-center py-12 text-gray-400">
+                <div class="text-center py-12 text-base-content/40">
                     <p>Add content to see it previewed here.</p>
                 </div>
             @endif
