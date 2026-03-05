@@ -37,7 +37,7 @@
             {{-- Column 1: Church info --}}
             <article>
                 @if($navLogoLight)
-                    <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="w-auto h-10 mb-2" />
+                    <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="w-auto h-14 mb-2" />
                 @else
                     <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ $siteName }}</h3>
                 @endif

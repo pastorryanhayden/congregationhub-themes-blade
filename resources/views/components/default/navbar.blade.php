@@ -28,9 +28,9 @@
         <div class="flex lg:flex-1">
             <a href="/" class="flex items-center gap-2 p-1.5 -m-1.5">
                 @if($transparent && $navLogoLight)
-                    <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="w-auto h-8" />
+                    <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="w-auto h-12" />
                 @elseif(!$transparent && $navLogoDark)
-                    <img src="{{ $navLogoDark }}" alt="{{ $siteName }}" class="w-auto h-8" />
+                    <img src="{{ $navLogoDark }}" alt="{{ $siteName }}" class="w-auto h-12" />
                 @endif
                 @if($transparent ? !$navLogoLight : !$navLogoDark)
                     <span class="text-lg font-semibold uppercase {{ $transparent ? 'text-white' : '' }}">{{ $siteName }}</span>
