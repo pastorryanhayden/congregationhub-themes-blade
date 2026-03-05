@@ -10,6 +10,7 @@
     'facebookUrl' => '',
     'instagramUrl' => '',
     'navLogoLight' => null,
+    'navItems' => [],
 ])
 
 @php
@@ -22,6 +23,22 @@
     }
     $hasSocials = $youtubeUrl || $facebookUrl || $instagramUrl;
     $currentYear = date('Y');
+
+    // Build footer links from navItems
+    $footerLinks = [];
+    foreach ($navItems as $item) {
+        $label = $item['label'] ?? '';
+        $url = $item['url'] ?? '#';
+        if (!empty($item['children'])) {
+            foreach ($item['children'] as $child) {
+                $footerLinks[] = ['label' => $child['label'] ?? '', 'url' => $child['url'] ?? '#'];
+            }
+        } else {
+            $footerLinks[] = ['label' => $label, 'url' => $url];
+        }
+    }
+    // Limit to 6 links max
+    $footerLinks = array_slice($footerLinks, 0, 6);
 @endphp
 
 <footer class="bg-neutral text-neutral-content">
@@ -39,7 +56,7 @@
                 @if($navLogoLight)
                     <img src="{{ $navLogoLight }}" alt="{{ $siteName }}" class="w-auto h-14 mb-2" />
                 @else
-                    <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ $siteName }}</h3>
+                    <h3 class="text-2xl font-sans uppercase font-extrabold mb-2">{{ $siteName }}</h3>
                 @endif
                 <div class="text-sm font-sans">{!! $footerAbout !!}</div>
             </article>
@@ -98,27 +115,19 @@
             </article>
 
             {{-- Column 4: Useful Links --}}
-            <article>
-                <h3 class="text-2xl font-sans uppercase font-bold mb-2">Useful Links</h3>
-                <p class="flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 inline mr-2 flex-shrink-0">
-                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                    </svg>
-                    <a href="#">About Us</a>
-                </p>
-                <p class="flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 inline mr-2 flex-shrink-0">
-                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                    </svg>
-                    <a href="#">Contact</a>
-                </p>
-                <p class="flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 inline mr-2 flex-shrink-0">
-                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                    </svg>
-                    <a href="#">Give Online</a>
-                </p>
-            </article>
+            @if(count($footerLinks) > 0)
+                <article>
+                    <h3 class="text-2xl font-sans uppercase font-bold mb-2">Useful Links</h3>
+                    @foreach($footerLinks as $link)
+                        <p class="flex items-center mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 inline mr-2 flex-shrink-0">
+                                <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                            </svg>
+                            <a href="{{ $link['url'] }}">{{ $link['label'] }}</a>
+                        </p>
+                    @endforeach
+                </article>
+            @endif
         </div>
 
         {{-- Social Links --}}
