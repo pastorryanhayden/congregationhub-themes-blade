@@ -11,6 +11,7 @@
     'instagramUrl' => '',
     'navLogoLight' => null,
     'navItems' => [],
+    'usefulLinks' => [],
 ])
 
 @php
@@ -24,21 +25,24 @@
     $hasSocials = $youtubeUrl || $facebookUrl || $instagramUrl;
     $currentYear = date('Y');
 
-    // Build footer links from navItems
+    // Use custom useful links if set, otherwise build from navItems
     $footerLinks = [];
-    foreach ($navItems as $item) {
-        $label = $item['label'] ?? '';
-        $url = $item['url'] ?? '#';
-        if (!empty($item['children'])) {
-            foreach ($item['children'] as $child) {
-                $footerLinks[] = ['label' => $child['label'] ?? '', 'url' => $child['url'] ?? '#'];
+    if (!empty($usefulLinks)) {
+        $footerLinks = array_filter($usefulLinks, fn($link) => !empty($link['label']));
+    } else {
+        foreach ($navItems as $item) {
+            $label = $item['label'] ?? '';
+            $url = $item['url'] ?? '#';
+            if (!empty($item['children'])) {
+                foreach ($item['children'] as $child) {
+                    $footerLinks[] = ['label' => $child['label'] ?? '', 'url' => $child['url'] ?? '#'];
+                }
+            } else {
+                $footerLinks[] = ['label' => $label, 'url' => $url];
             }
-        } else {
-            $footerLinks[] = ['label' => $label, 'url' => $url];
         }
+        $footerLinks = array_slice($footerLinks, 0, 6);
     }
-    // Limit to 6 links max
-    $footerLinks = array_slice($footerLinks, 0, 6);
 @endphp
 
 <footer class="bg-neutral text-neutral-content">
