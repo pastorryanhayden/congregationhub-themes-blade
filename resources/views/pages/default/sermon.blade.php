@@ -119,7 +119,7 @@
                     @if(!empty($s['description']))
                         <div class="card bg-base-200 border-l-4 border-primary">
                             <div class="card-body py-4">
-                                <p class="text-base-content italic">{{ $s['description'] }}</p>
+                                <div class="text-base-content italic">{!! $s['description'] !!}</div>
                             </div>
                         </div>
                     @endif
@@ -127,7 +127,7 @@
                     {{-- Manuscript --}}
                     @if(!empty($s['manuscript']))
                         <div class="divider">Manuscript</div>
-                        <article class="prose prose-lg max-w-none">{!! $s['manuscript'] !!}</article>
+                        <article class="prose prose-lg max-w-none">{!! markdown_to_html($s['manuscript']) !!}</article>
                     @endif
                 </div>
 

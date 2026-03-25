@@ -46,7 +46,7 @@
                     @endif
                     <p class="text-sm text-base-content/50 mt-1">{{ $sp['sermonCount'] ?? 0 }} {{ Str::plural('sermon', $sp['sermonCount'] ?? 0) }}</p>
                     @if(!empty($sp['bio']))
-                        <div class="prose prose-sm mt-4 max-w-none">{!! $sp['bio'] !!}</div>
+                        <div class="prose prose-sm mt-4 max-w-none">{!! markdown_to_html($sp['bio']) !!}</div>
                     @endif
                 </div>
             </div>

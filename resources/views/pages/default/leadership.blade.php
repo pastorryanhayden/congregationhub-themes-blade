@@ -39,7 +39,7 @@
                             <div>
                                 <h2 class="text-2xl font-bold text-base-content">{{ $lookingForPastorHeading }}</h2>
                                 @if($lookingForPastorMessage)
-                                    <div class="mt-3 prose prose-sm max-w-none text-base-content/80">{!! $lookingForPastorMessage !!}</div>
+                                    <div class="mt-3 prose prose-sm max-w-none text-base-content/80">{!! markdown_to_html($lookingForPastorMessage) !!}</div>
                                 @else
                                     <p class="mt-3 text-base-content/80">Our church is currently seeking a pastor. Please contact us for more information.</p>
                                 @endif

@@ -48,7 +48,7 @@
             </div>
 
             @if(!empty($s['body']))
-                <div class="prose max-w-none mb-8">{!! $s['body'] !!}</div>
+                <div class="prose max-w-none mb-8">{!! markdown_to_html($s['body']) !!}</div>
             @endif
 
             {{-- Sermons in Series --}}

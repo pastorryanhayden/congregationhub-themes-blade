@@ -42,7 +42,7 @@
                                 @endif
                                 <h3 class="text-lg font-semibold text-neutral-content">{{ $section['title'] ?? '' }}</h3>
                                 @if(!empty($section['description']))
-                                    <p class="mt-2 text-sm text-neutral-content/60">{{ $section['description'] }}</p>
+                                    <div class="mt-2 text-sm text-neutral-content/60">{!! $section['description'] !!}</div>
                                 @endif
                             </a>
                         @endforeach
@@ -68,7 +68,7 @@
                                 <h2 class="mt-2 text-3xl font-bold tracking-tight text-base-content sm:text-4xl">{{ $section['section_heading'] }}</h2>
                             @endif
                             @if(!empty($section['content']))
-                                <div class="mt-8 prose prose-lg max-w-none text-base-content/70">{!! $section['content'] !!}</div>
+                                <div class="mt-8 prose prose-lg max-w-none text-base-content/70">{!! markdown_to_html($section['content']) !!}</div>
                             @endif
                         </div>
                         @if($index < count($sections) - 1)

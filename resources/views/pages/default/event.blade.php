@@ -47,12 +47,12 @@
 
             {{-- Event description --}}
             @if($description)
-                <p class="text-lg text-base-content/80 mb-8">{{ $description }}</p>
+                <div class="text-lg text-base-content/80 mb-8">{!! $description !!}</div>
             @endif
 
             {{-- Event content --}}
             @if($content)
-                <div class="prose prose-lg max-w-none">{!! $content !!}</div>
+                <div class="prose prose-lg max-w-none">{!! markdown_to_html($content) !!}</div>
             @endif
 
             {{-- Back to events link --}}

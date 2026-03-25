@@ -62,7 +62,7 @@
                 @else
                     <h3 class="text-2xl font-sans uppercase font-extrabold mb-2">{{ $siteName }}</h3>
                 @endif
-                <div class="text-sm font-sans">{!! $footerAbout !!}</div>
+                <div class="text-sm font-sans">{!! markdown_to_html($footerAbout) !!}</div>
             </article>
 
             {{-- Column 2: Schedule --}}
