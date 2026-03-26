@@ -18,6 +18,13 @@ if (! function_exists('markdown_to_html')) {
             return $text;
         }
 
+        // Encode spaces in markdown image/link URLs so CommonMark can parse them
+        $text = preg_replace_callback('/(!?\[[^\]]*\])\(([^)]+)\)/', function ($matches) {
+            $url = str_replace(' ', '%20', $matches[2]);
+
+            return $matches[1].'('.$url.')';
+        }, $text);
+
         return \Illuminate\Support\Str::markdown($text, [
             'html_input' => 'allow',
             'allow_unsafe_links' => false,
