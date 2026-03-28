@@ -49,6 +49,16 @@
                                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                             </iframe>
                         </div>
+                    @elseif(!empty($s['vimeoId']))
+                        <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
+                            <iframe
+                                src="https://player.vimeo.com/video/{{ $s['vimeoId'] }}"
+                                class="w-full h-full"
+                                frameborder="0"
+                                allow="autoplay; fullscreen; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
                     @elseif(!empty($seriesData['image']))
                         <div class="relative w-full aspect-[21/9] rounded-lg overflow-hidden shadow-xl">
                             <img src="{{ $seriesData['image'] }}" alt="{{ $seriesData['title'] ?? '' }}" class="w-full h-full object-cover" />
