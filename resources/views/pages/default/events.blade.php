@@ -1,5 +1,5 @@
 @php
-    $month = $currentMonth ?? 'This Month';
+    $month = $currentMonth ?? __('This Month');
     $prev = $prevMonth ?? [];
     $next = $nextMonth ?? [];
     $days = $calendarDays ?? [];
@@ -11,7 +11,7 @@
 
     <main>
         @include('themes::components.default.dark-hero', [
-            'heading' => 'Events & Calendar',
+            'heading' => __('Events & Calendar'),
         ])
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -27,7 +27,7 @@
                             </svg>
                         </a>
                     @endif
-                    <a href="/events" class="btn btn-ghost btn-sm">Today</a>
+                    <a href="/events" class="btn btn-ghost btn-sm">{{ __('Today') }}</a>
                     @if(!empty($next))
                         <a href="/events?year={{ $next['year'] }}&month={{ $next['month'] }}"
                            class="btn btn-ghost btn-sm">
@@ -44,7 +44,7 @@
                 <div class="card-body p-2 sm:p-4">
                     {{-- Day Headers --}}
                     <div class="grid grid-cols-7 gap-1 mb-2">
-                        @foreach(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as $dayName)
+                        @foreach([__('Sun'), __('Mon'), __('Tue'), __('Wed'), __('Thu'), __('Fri'), __('Sat')] as $dayName)
                             <div class="text-center text-sm font-semibold text-base-content/60 py-2">
                                 {{ $dayName }}
                             </div>
@@ -84,7 +84,7 @@
                                         $hiddenCount = count($day['events'] ?? []) - 2;
                                     @endphp
                                     @if($hiddenCount > 0)
-                                        <div class="text-xs text-base-content/60">+{{ $hiddenCount }} more</div>
+                                        <div class="text-xs text-base-content/60">{{ __(':count more', ['count' => '+' . $hiddenCount]) }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
             {{-- Upcoming Events --}}
             @if(!empty($upcoming))
                 <div class="mt-12">
-                    <h2 class="text-2xl font-bold mb-6">Upcoming Events</h2>
+                    <h2 class="text-2xl font-bold mb-6">{{ __('Upcoming Events') }}</h2>
 
                     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         @foreach($upcoming as $event)
@@ -131,7 +131,7 @@
                                     @endif
                                     @if(!empty($event['url']))
                                         <div class="card-actions justify-end mt-2">
-                                            <a href="{{ $event['url'] }}" class="btn btn-primary btn-sm">Details</a>
+                                            <a href="{{ $event['url'] }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a>
                                         </div>
                                     @endif
                                 </div>

@@ -24,7 +24,7 @@
                 @endif
             @endif
             @if(!empty($event['url']))
-                <a href="{{ $event['url'] }}" class="mt-4 text-neutral-content/80 underline">Learn More</a>
+                <a href="{{ $event['url'] }}" class="mt-4 text-neutral-content/80 underline">{{ __('Learn More') }}</a>
             @endif
         </div>
     </div>

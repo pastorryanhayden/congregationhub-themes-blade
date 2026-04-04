@@ -1,5 +1,5 @@
 @php
-    $title = $pageTitle ?? 'Our Ministries';
+    $title = $pageTitle ?? __('Our Ministries');
     $items = $ministries ?? [];
 @endphp
 
@@ -52,7 +52,7 @@
                 </div>
             @else
                 <div class="text-center py-12 text-base-content/60">
-                    <p>No ministries to display.</p>
+                    <p>{{ __('No ministries to display.') }}</p>
                 </div>
             @endif
         </div>

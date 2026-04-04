@@ -1,5 +1,5 @@
 @php
-    $title = $pageTitle ?? 'Sermons';
+    $title = $pageTitle ?? __('Sermons');
     $items = $sermons ?? [];
     $page = $pagination ?? [];
     $featured = $featuredSeries ?? [];
@@ -27,7 +27,7 @@
                         type="text"
                         name="search"
                         value="{{ $active['search'] ?? '' }}"
-                        placeholder="Search sermons..."
+                        placeholder="{{ __('Search sermons...') }}"
                         class="input w-full pl-10"
                     >
                 </div>
@@ -35,7 +35,7 @@
                 <div class="flex flex-wrap gap-2">
                     @if(!empty($filterOptions['years']))
                         <select name="year" class="select select-sm w-auto" onchange="this.form.submit()">
-                            <option value="">All Years</option>
+                            <option value="">{{ __('All Years') }}</option>
                             @foreach($filterOptions['years'] as $year)
                                 <option value="{{ $year }}" {{ ($active['year'] ?? '') == $year ? 'selected' : '' }}>{{ $year }}</option>
                             @endforeach
@@ -44,7 +44,7 @@
 
                     @if(!empty($filterOptions['books']))
                         <select name="book" class="select select-sm w-auto" onchange="this.form.submit()">
-                            <option value="">All Scripture</option>
+                            <option value="">{{ __('All Scripture') }}</option>
                             @foreach($filterOptions['books'] as $book)
                                 <option value="{{ $book['id'] }}" {{ ($active['book'] ?? '') == $book['id'] ? 'selected' : '' }}>{{ $book['name'] }}</option>
                             @endforeach
@@ -53,7 +53,7 @@
 
                     @if(!empty($filterOptions['speakers']))
                         <select name="speaker" class="select select-sm w-auto" onchange="this.form.submit()">
-                            <option value="">All Speakers</option>
+                            <option value="">{{ __('All Speakers') }}</option>
                             @foreach($filterOptions['speakers'] as $sp)
                                 <option value="{{ $sp['id'] }}" {{ ($active['speaker'] ?? '') == $sp['id'] ? 'selected' : '' }}>{{ $sp['name'] }}</option>
                             @endforeach
@@ -62,7 +62,7 @@
 
                     @if(!empty($filterOptions['series']))
                         <select name="series" class="select select-sm w-auto" onchange="this.form.submit()">
-                            <option value="">All Series</option>
+                            <option value="">{{ __('All Series') }}</option>
                             @foreach($filterOptions['series'] as $s)
                                 <option value="{{ $s['id'] }}" {{ ($active['series'] ?? '') == $s['id'] ? 'selected' : '' }}>{{ $s['title'] }}</option>
                             @endforeach
@@ -70,21 +70,21 @@
                     @endif
 
                     @if($hasFilters)
-                        <a href="/sermons" class="btn btn-ghost btn-sm">Clear Filters</a>
+                        <a href="/sermons" class="btn btn-ghost btn-sm">{{ __('Clear Filters') }}</a>
                     @endif
                 </div>
             </form>
 
             {{-- Browse Links --}}
             <div class="flex gap-3 mb-8">
-                <a href="/sermons/series" class="btn btn-outline btn-sm">Browse Series</a>
-                <a href="/sermons/speakers" class="btn btn-outline btn-sm">Browse Speakers</a>
+                <a href="/sermons/series" class="btn btn-outline btn-sm">{{ __('Browse Series') }}</a>
+                <a href="/sermons/speakers" class="btn btn-outline btn-sm">{{ __('Browse Speakers') }}</a>
             </div>
 
             {{-- Featured Series --}}
             @if(!empty($featured) && !$hasFilters)
                 <div class="mb-10">
-                    <h2 class="text-xl font-bold mb-4">Featured Series</h2>
+                    <h2 class="text-xl font-bold mb-4">{{ __('Featured Series') }}</h2>
                     <div class="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
                         @foreach($featured as $s)
                             <a href="{{ $s['url'] ?? '#' }}" class="flex-shrink-0 w-64 card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
@@ -101,7 +101,7 @@
                                 @endif
                                 <div class="card-body p-4">
                                     <h3 class="card-title text-sm">{{ $s['title'] ?? '' }}</h3>
-                                    <p class="text-xs text-base-content/60">{{ $s['sermonCount'] ?? 0 }} {{ Str::plural('sermon', $s['sermonCount'] ?? 0) }}</p>
+                                    <p class="text-xs text-base-content/60">{{ trans_choice('{0} :count sermons|{1} :count sermon|[2,*] :count sermons', $s['sermonCount'] ?? 0, ['count' => $s['sermonCount'] ?? 0]) }}</p>
                                 </div>
                             </a>
                         @endforeach
@@ -113,10 +113,10 @@
             <div>
                 <h2 class="text-xl font-bold mb-4">
                     @if($hasFilters)
-                        Search Results
+                        {{ __('Search Results') }}
                         <span class="text-base-content/60 font-normal">({{ $page['total'] ?? count($items) }})</span>
                     @else
-                        Recent Sermons
+                        {{ __('Recent Sermons') }}
                     @endif
                 </h2>
 
@@ -125,16 +125,16 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto size-12 text-base-content/30">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />
                         </svg>
-                        <h3 class="mt-4 text-lg font-medium">No sermons found</h3>
+                        <h3 class="mt-4 text-lg font-medium">{{ __('No sermons found') }}</h3>
                         <p class="mt-1 text-base-content/60">
                             @if($hasFilters)
-                                Try adjusting your search or filters.
+                                {{ __('Try adjusting your search or filters.') }}
                             @else
-                                Sermons will appear here once published.
+                                {{ __('Sermons will appear here once published.') }}
                             @endif
                         </p>
                         @if($hasFilters)
-                            <a href="/sermons" class="btn btn-ghost btn-sm mt-4">Clear Filters</a>
+                            <a href="/sermons" class="btn btn-ghost btn-sm mt-4">{{ __('Clear Filters') }}</a>
                         @endif
                     </div>
                 @else

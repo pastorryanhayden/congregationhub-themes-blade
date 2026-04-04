@@ -1,5 +1,5 @@
 @php
-    $heading = $aboutHeading ?? 'About Us';
+    $heading = $aboutHeading ?? __('About Us');
     $subheading = $aboutSubheading ?? '';
     $image = $aboutImage ?? null;
     $sections = $aboutSections ?? [];
@@ -55,7 +55,7 @@
         <div class="bg-base-100">
             @if(count($sections) === 0)
                 <div class="py-24 text-center">
-                    <p class="text-base-content/40">Add sections to tell your church's story.</p>
+                    <p class="text-base-content/40">{{ __("Add sections to tell your church's story.") }}</p>
                 </div>
             @else
                 @foreach($sections as $index => $section)

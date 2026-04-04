@@ -1,5 +1,5 @@
 @php
-    $title = $pageTitle ?? 'Sermon Series';
+    $title = $pageTitle ?? __('Sermon Series');
     $items = $series ?? [];
 @endphp
 
@@ -12,7 +12,7 @@
         ])
 
         @include('themes::components.default.breadcrumb', [
-            'parent' => 'Sermons',
+            'parent' => __('Sermons'),
             'parentUrl' => '/sermons',
             'current' => $title,
         ])
@@ -39,17 +39,17 @@
                                 <h2 class="card-title">
                                     {{ $s['title'] ?? '' }}
                                     @if(!empty($s['featured']))
-                                        <span class="badge badge-primary badge-sm">Featured</span>
+                                        <span class="badge badge-primary badge-sm">{{ __('Featured') }}</span>
                                     @endif
                                     @if(!empty($s['completed']))
-                                        <span class="badge badge-ghost badge-sm">Complete</span>
+                                        <span class="badge badge-ghost badge-sm">{{ __('Complete') }}</span>
                                     @endif
                                 </h2>
                                 @if(!empty($s['description']))
                                     <p class="text-base-content/70">{{ Str::limit(strip_tags($s['description']), 120) }}</p>
                                 @endif
                                 <div class="flex items-center justify-between mt-2 text-sm text-base-content/60">
-                                    <span>{{ $s['sermonCount'] ?? 0 }} {{ Str::plural('sermon', $s['sermonCount'] ?? 0) }}</span>
+                                    <span>{{ trans_choice('{0} :count sermons|{1} :count sermon|[2,*] :count sermons', $s['sermonCount'] ?? 0, ['count' => $s['sermonCount'] ?? 0]) }}</span>
                                     @if(!empty($s['dateRange']))
                                         <span>{{ $s['dateRange'] }}</span>
                                     @endif
@@ -60,7 +60,7 @@
                 </div>
             @else
                 <div class="text-center py-12 text-base-content/60">
-                    <p>No sermon series to display.</p>
+                    <p>{{ __('No sermon series to display.') }}</p>
                 </div>
             @endif
 
@@ -69,7 +69,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                     </svg>
-                    Back to Sermons
+                    {{ __('Back to Sermons') }}
                 </a>
             </div>
         </div>

@@ -18,8 +18,8 @@
     $sections = $scheduleSections;
     if (empty($sections)) {
         $sections = [
-            ['title' => 'Sunday Morning', 'items' => [['time' => '10:00 AM', 'description' => 'Worship Service']]],
-            ['title' => 'Wednesday Evening', 'items' => [['time' => '7:00 PM', 'description' => 'Bible Study']]],
+            ['title' => __('Sunday Morning'), 'items' => [['time' => '10:00 AM', 'description' => __('Worship Service')]]],
+            ['title' => __('Wednesday Evening'), 'items' => [['time' => '7:00 PM', 'description' => __('Bible Study')]]],
         ];
     }
     $hasSocials = $youtubeUrl || $facebookUrl || $instagramUrl;
@@ -49,8 +49,8 @@
     <div class="max-w-7xl mx-auto p-8">
         {{-- Heading --}}
         <div class="my-8 text-center">
-            <h2 class="font-serif text-4xl uppercase tracking-wide">Experience {{ $siteName }}</h2>
-            <p class="mt-4 font-sans italic text-lg">Join us this week for church.</p>
+            <h2 class="font-serif text-4xl uppercase tracking-wide">{{ __('Experience :name', ['name' => $siteName]) }}</h2>
+            <p class="mt-4 font-sans italic text-lg">{{ __('Join us this week for church.') }}</p>
         </div>
 
         {{-- 4-column grid --}}
@@ -67,7 +67,7 @@
 
             {{-- Column 2: Schedule --}}
             <article>
-                <h3 class="text-2xl font-sans uppercase font-bold mb-2">Schedule</h3>
+                <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ __('Schedule') }}</h3>
                 <div class="text-sm font-sans">
                     @foreach($sections as $i => $section)
                         <p class="font-bold {{ $i > 0 ? 'mt-2' : '' }}">{{ $section['title'] ?? '' }}</p>
@@ -85,7 +85,7 @@
 
             {{-- Column 3: Contact --}}
             <article>
-                <h3 class="text-2xl font-sans uppercase font-bold mb-2">Contact Us</h3>
+                <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ __('Contact Us') }}</h3>
                 <div class="text-sm font-sans">
                     <p class="flex items-center mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 inline mr-2 flex-shrink-0">
@@ -121,7 +121,7 @@
             {{-- Column 4: Useful Links --}}
             @if(count($footerLinks) > 0)
                 <article>
-                    <h3 class="text-2xl font-sans uppercase font-bold mb-2">Useful Links</h3>
+                    <h3 class="text-2xl font-sans uppercase font-bold mb-2">{{ __('Useful Links') }}</h3>
                     @foreach($footerLinks as $link)
                         <p class="flex items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 inline mr-2 flex-shrink-0">
@@ -157,7 +157,7 @@
 
         {{-- Copyright bar --}}
         <section class="p-8">
-            <p class="text-center italic text-sm text-neutral-content/50 font-sans">&copy; {{ $currentYear }} - All rights reserved</p>
+            <p class="text-center italic text-sm text-neutral-content/50 font-sans">&copy; {{ $currentYear }} - {{ __('All rights reserved') }}</p>
         </section>
     </div>
 </footer>

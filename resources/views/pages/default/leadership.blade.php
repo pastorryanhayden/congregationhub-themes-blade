@@ -1,9 +1,9 @@
 @php
-    $churchName = $siteName ?? 'Our Church';
+    $churchName = $siteName ?? __('Our Church');
     $seniorLeaders = $seniorLeaders ?? [];
     $leadershipSections = $leadershipSections ?? [];
     $lookingForPastor = $lookingForPastor ?? false;
-    $lookingForPastorHeading = $lookingForPastorHeading ?? 'Pastoral Search';
+    $lookingForPastorHeading = $lookingForPastorHeading ?? __('Pastoral Search');
     $lookingForPastorMessage = $lookingForPastorMessage ?? '';
     $hasContent = count($seniorLeaders) > 0 || count($leadershipSections) > 0;
 
@@ -20,8 +20,8 @@
         {{-- Hero Section --}}
         <div class="bg-base-200 py-16 lg:py-24">
             <div class="mx-auto max-w-7xl px-6 text-center">
-                <h1 class="text-4xl font-bold tracking-tight text-base-content sm:text-5xl">Our Leadership</h1>
-                <p class="mt-4 text-lg text-base-content/70">Meet the people who lead and serve at {{ $churchName }}</p>
+                <h1 class="text-4xl font-bold tracking-tight text-base-content sm:text-5xl">{{ __('Our Leadership') }}</h1>
+                <p class="mt-4 text-lg text-base-content/70">{{ __('Meet the people who lead and serve at :church', ['church' => $churchName]) }}</p>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
                                 @if($lookingForPastorMessage)
                                     <div class="mt-3 prose prose-sm max-w-none text-base-content/80">{!! markdown_to_html($lookingForPastorMessage) !!}</div>
                                 @else
-                                    <p class="mt-3 text-base-content/80">Our church is currently seeking a pastor. Please contact us for more information.</p>
+                                    <p class="mt-3 text-base-content/80">{{ __('Our church is currently seeking a pastor. Please contact us for more information.') }}</p>
                                 @endif
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                     <svg class="mx-auto size-12 text-base-content/30 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                     </svg>
-                    <p class="text-base-content/40">Add leaders and sections to build your leadership page.</p>
+                    <p class="text-base-content/40">{{ __('Add leaders and sections to build your leadership page.') }}</p>
                 </div>
             @endif
 
@@ -77,7 +77,7 @@
                                         @if(!empty($leader['title']))
                                             <p class="text-sm font-semibold uppercase tracking-wider text-base-content/50">{{ $leader['title'] }}</p>
                                         @endif
-                                        <h2 class="mt-2 text-3xl font-bold tracking-tight text-base-content">{{ $leader['name'] ?? 'Senior Leader' }}</h2>
+                                        <h2 class="mt-2 text-3xl font-bold tracking-tight text-base-content">{{ $leader['name'] ?? __('Senior Leader') }}</h2>
                                         @if(!empty($leader['bio']))
                                             <p class="mt-4 text-base leading-7 text-base-content/70">{{ $leader['bio'] }}</p>
                                         @endif
@@ -94,7 +94,7 @@
                 @foreach($leadershipSections as $sectionIndex => $section)
                     <div class="mx-auto max-w-7xl px-6 py-12 lg:py-16">
                         <div class="mb-10">
-                            <h2 class="text-2xl font-bold tracking-tight text-base-content">{{ $section['title'] ?? 'Section' }}</h2>
+                            <h2 class="text-2xl font-bold tracking-tight text-base-content">{{ $section['title'] ?? __('Section') }}</h2>
                             <div class="mt-2 h-1 w-16 rounded bg-base-content"></div>
                         </div>
 
@@ -111,7 +111,7 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <h3 class="text-lg font-semibold text-base-content">{{ $member['name'] ?? 'Member' }}</h3>
+                                        <h3 class="text-lg font-semibold text-base-content">{{ $member['name'] ?? __('Member') }}</h3>
                                         @if(!empty($member['title']))
                                             <p class="mt-1 text-sm text-base-content/50">{{ $member['title'] }}</p>
                                         @endif
@@ -122,7 +122,7 @@
                                 @endforeach
                             </div>
                         @else
-                            <p class="text-base-content/40 text-center py-8">No members added to this section yet.</p>
+                            <p class="text-base-content/40 text-center py-8">{{ __('No members added to this section yet.') }}</p>
                         @endif
 
                         @if($sectionIndex < count($leadershipSections) - 1)

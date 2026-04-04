@@ -1,5 +1,5 @@
 @php
-    $title = $pageTitle ?? 'Speakers';
+    $title = $pageTitle ?? __('Speakers');
     $items = $speakers ?? [];
 @endphp
 
@@ -12,7 +12,7 @@
         ])
 
         @include('themes::components.default.breadcrumb', [
-            'parent' => 'Sermons',
+            'parent' => __('Sermons'),
             'parentUrl' => '/sermons',
             'current' => $title,
         ])
@@ -40,14 +40,14 @@
                                 @if(!empty($sp['position']))
                                     <p class="text-sm text-base-content/60">{{ $sp['position'] }}</p>
                                 @endif
-                                <p class="text-sm text-base-content/50 mt-1">{{ $sp['sermonCount'] ?? 0 }} {{ Str::plural('sermon', $sp['sermonCount'] ?? 0) }}</p>
+                                <p class="text-sm text-base-content/50 mt-1">{{ trans_choice('{0} :count sermons|{1} :count sermon|[2,*] :count sermons', $sp['sermonCount'] ?? 0, ['count' => $sp['sermonCount'] ?? 0]) }}</p>
                             </div>
                         </a>
                     @endforeach
                 </div>
             @else
                 <div class="text-center py-12 text-base-content/60">
-                    <p>No speakers to display.</p>
+                    <p>{{ __('No speakers to display.') }}</p>
                 </div>
             @endif
 
@@ -56,7 +56,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                     </svg>
-                    Back to Sermons
+                    {{ __('Back to Sermons') }}
                 </a>
             </div>
         </div>

@@ -1,7 +1,7 @@
 @php
     $s = $sermon ?? [];
     $related = $relatedSermons ?? [];
-    $title = $s['title'] ?? 'Sermon';
+    $title = $s['title'] ?? __('Sermon');
     $speaker = $s['speaker'] ?? null;
     $seriesData = $s['series'] ?? null;
     $scriptures = $s['scriptures'] ?? [];
@@ -17,7 +17,7 @@
         ])
 
         @include('themes::components.default.breadcrumb', [
-            'parent' => 'Sermons',
+            'parent' => __('Sermons'),
             'parentUrl' => '/sermons',
             'current' => $title,
         ])
@@ -81,10 +81,10 @@
 
                         <p class="text-base-content/60">
                             @if($speaker)
-                                Preached by <a href="/sermons/speakers/{{ $speaker['slug'] }}" class="font-medium text-base-content hover:text-primary transition-colors">{{ $speaker['name'] }}</a>
+                                {{ __('Preached by') }} <a href="/sermons/speakers/{{ $speaker['slug'] }}" class="font-medium text-base-content hover:text-primary transition-colors">{{ $speaker['name'] }}</a>
                             @endif
                             @if(!empty($s['date']))
-                                on <span class="font-medium text-base-content">{{ $s['date'] }}</span>
+                                {{ __('on') }} <span class="font-medium text-base-content">{{ $s['date'] }}</span>
                             @endif
                         </p>
                     </div>
@@ -96,13 +96,13 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
                                 </svg>
-                                Play Audio
+                                {{ __('Play Audio') }}
                             </a>
                             <a href="{{ $s['mp3Url'] }}" download class="btn btn-outline">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                 </svg>
-                                Download MP3
+                                {{ __('Download MP3') }}
                             </a>
                         @endif
 
@@ -111,7 +111,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                 </svg>
-                                Handout
+                                {{ __('Handout') }}
                             </a>
                         @endif
 
@@ -120,7 +120,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5" />
                                 </svg>
-                                Slides
+                                {{ __('Slides') }}
                             </a>
                         @endif
                     </div>
@@ -136,7 +136,7 @@
 
                     {{-- Manuscript --}}
                     @if(!empty($s['manuscript']))
-                        <div class="divider">Manuscript</div>
+                        <div class="divider">{{ __('Manuscript') }}</div>
                         <article class="prose prose-lg max-w-none">{!! markdown_to_html($s['manuscript']) !!}</article>
                     @endif
                 </div>
@@ -148,7 +148,7 @@
                         <div class="card bg-base-100 shadow">
                             <div class="card-body">
                                 <h3 class="card-title text-lg">
-                                    <a href="/sermons/series/{{ $seriesData['slug'] }}" class="hover:text-primary transition-colors">More from this series</a>
+                                    <a href="/sermons/series/{{ $seriesData['slug'] }}" class="hover:text-primary transition-colors">{{ __('More from this series') }}</a>
                                 </h3>
                                 <ul class="space-y-3">
                                     @foreach($related as $rel)
@@ -211,7 +211,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                         </svg>
-                        All Sermons
+                        {{ __('All Sermons') }}
                     </a>
                 </div>
             </div>

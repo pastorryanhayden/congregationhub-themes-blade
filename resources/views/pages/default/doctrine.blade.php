@@ -1,5 +1,5 @@
 @php
-    $heading = $doctrineHeading ?? 'Statement of Faith';
+    $heading = $doctrineHeading ?? __('Statement of Faith');
     $content = $doctrineContent ?? '';
 @endphp
 
@@ -14,7 +14,7 @@
                 <div class="prose prose-lg max-w-none">{!! markdown_to_html($content) !!}</div>
             @else
                 <div class="text-center py-12 text-base-content/40">
-                    <p>Add content to see it previewed here.</p>
+                    <p>{{ __('Add content to see it previewed here.') }}</p>
                 </div>
             @endif
         </div>

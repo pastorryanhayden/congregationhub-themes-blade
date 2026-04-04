@@ -11,9 +11,9 @@
     <div class="bg-base-200">
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="sm:flex sm:items-baseline sm:justify-between">
-                <h2 class="text-2xl font-bold tracking-tight text-base-content">Featured Series</h2>
+                <h2 class="text-2xl font-bold tracking-tight text-base-content">{{ __('Featured Series') }}</h2>
                 <a href="/sermons/series" class="hidden text-sm font-semibold text-base-content/60 hover:text-primary sm:block">
-                    View All Series
+                    {{ __('View All Series') }}
                     <span aria-hidden="true"> &rarr;</span>
                 </a>
             </div>
@@ -98,7 +98,7 @@
 
             <div class="mt-6 sm:hidden">
                 <a href="/sermons/series" class="block text-sm font-semibold text-base-content/60 hover:text-base-content/50">
-                    Browse all sermon series
+                    {{ __('Browse all sermon series') }}
                     <span aria-hidden="true"> &rarr;</span>
                 </a>
             </div>

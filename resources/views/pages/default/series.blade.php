@@ -1,7 +1,7 @@
 @php
     $s = $series ?? [];
     $items = $sermons ?? [];
-    $title = $s['title'] ?? 'Series';
+    $title = $s['title'] ?? __('Series');
 @endphp
 
 <div class="min-h-screen bg-base-100" data-theme="corporate">
@@ -14,7 +14,7 @@
         ])
 
         @include('themes::components.default.breadcrumb', [
-            'parent' => 'Sermon Series',
+            'parent' => __('Sermon Series'),
             'parentUrl' => '/sermons/series',
             'current' => $title,
         ])
@@ -25,10 +25,10 @@
                 <div class="flex flex-wrap items-center gap-3 mb-4">
                     <h1 class="text-3xl font-bold">{{ $title }}</h1>
                     @if(!empty($s['featured']))
-                        <span class="badge badge-primary">Featured</span>
+                        <span class="badge badge-primary">{{ __('Featured') }}</span>
                     @endif
                     @if(!empty($s['completed']))
-                        <span class="badge badge-ghost">Complete</span>
+                        <span class="badge badge-ghost">{{ __('Complete') }}</span>
                     @endif
                 </div>
 
@@ -37,7 +37,7 @@
                 @endif
 
                 <div class="flex flex-wrap gap-4 text-sm text-base-content/60">
-                    <span>{{ $s['sermonCount'] ?? 0 }} {{ Str::plural('sermon', $s['sermonCount'] ?? 0) }}</span>
+                    <span>{{ trans_choice('{0} :count sermons|{1} :count sermon|[2,*] :count sermons', $s['sermonCount'] ?? 0, ['count' => $s['sermonCount'] ?? 0]) }}</span>
                     @if(!empty($s['primarySpeaker']))
                         <span>&middot;</span>
                         <a href="/sermons/speakers/{{ $s['primarySpeaker']['slug'] }}" class="hover:text-primary transition-colors">
@@ -53,7 +53,7 @@
 
             {{-- Sermons in Series --}}
             @if(!empty($items))
-                <h2 class="text-xl font-bold mb-4">Sermons in this Series</h2>
+                <h2 class="text-xl font-bold mb-4">{{ __('Sermons in this Series') }}</h2>
                 <div class="space-y-3">
                     @foreach($items as $index => $sermon)
                         <a href="{{ $sermon['url'] ?? '#' }}" class="flex items-start gap-4 group hover:bg-base-200 p-4 -mx-4 rounded-lg transition-colors">
@@ -90,7 +90,7 @@
                 </div>
             @else
                 <div class="text-center py-12 text-base-content/60">
-                    <p>No sermons in this series yet.</p>
+                    <p>{{ __('No sermons in this series yet.') }}</p>
                 </div>
             @endif
 
@@ -99,9 +99,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                     </svg>
-                    All Series
+                    {{ __('All Series') }}
                 </a>
-                <a href="/sermons" class="btn btn-ghost gap-2">All Sermons</a>
+                <a href="/sermons" class="btn btn-ghost gap-2">{{ __('All Sermons') }}</a>
             </div>
         </div>
     </main>

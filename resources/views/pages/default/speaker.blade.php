@@ -5,7 +5,7 @@
     $filterOptions = $filters ?? [];
     $active = $activeFilters ?? [];
     $hasFilters = !empty($active['year']) || !empty($active['series']);
-    $name = $sp['name'] ?? 'Speaker';
+    $name = $sp['name'] ?? __('Speaker');
 @endphp
 
 <div class="min-h-screen bg-base-100" data-theme="corporate">
@@ -18,7 +18,7 @@
         ])
 
         @include('themes::components.default.breadcrumb', [
-            'parent' => 'Speakers',
+            'parent' => __('Speakers'),
             'parentUrl' => '/sermons/speakers',
             'current' => $name,
         ])
@@ -44,7 +44,7 @@
                     @if(!empty($sp['position']))
                         <p class="text-base-content/60 mt-1">{{ $sp['position'] }}</p>
                     @endif
-                    <p class="text-sm text-base-content/50 mt-1">{{ $sp['sermonCount'] ?? 0 }} {{ Str::plural('sermon', $sp['sermonCount'] ?? 0) }}</p>
+                    <p class="text-sm text-base-content/50 mt-1">{{ trans_choice('{0} :count sermons|{1} :count sermon|[2,*] :count sermons', $sp['sermonCount'] ?? 0, ['count' => $sp['sermonCount'] ?? 0]) }}</p>
                     @if(!empty($sp['bio']))
                         <div class="prose prose-sm mt-4 max-w-none">{!! markdown_to_html($sp['bio']) !!}</div>
                     @endif
@@ -55,7 +55,7 @@
             <form method="GET" class="flex flex-wrap gap-2 mb-6">
                 @if(!empty($filterOptions['years']))
                     <select name="year" class="select select-sm w-auto" onchange="this.form.submit()">
-                        <option value="">All Years</option>
+                        <option value="">{{ __('All Years') }}</option>
                         @foreach($filterOptions['years'] as $year)
                             <option value="{{ $year }}" {{ ($active['year'] ?? '') == $year ? 'selected' : '' }}>{{ $year }}</option>
                         @endforeach
@@ -64,7 +64,7 @@
 
                 @if(!empty($filterOptions['series']))
                     <select name="series" class="select select-sm w-auto" onchange="this.form.submit()">
-                        <option value="">All Series</option>
+                        <option value="">{{ __('All Series') }}</option>
                         @foreach($filterOptions['series'] as $s)
                             <option value="{{ $s['id'] }}" {{ ($active['series'] ?? '') == $s['id'] ? 'selected' : '' }}>{{ $s['title'] }}</option>
                         @endforeach
@@ -72,13 +72,13 @@
                 @endif
 
                 @if($hasFilters)
-                    <a href="" class="btn btn-ghost btn-sm">Clear Filters</a>
+                    <a href="" class="btn btn-ghost btn-sm">{{ __('Clear Filters') }}</a>
                 @endif
             </form>
 
             {{-- Sermons --}}
             <h2 class="text-xl font-bold mb-4">
-                Sermons
+                {{ __('Sermons') }}
                 @if($hasFilters)
                     <span class="text-base-content/60 font-normal">({{ $page['total'] ?? count($items) }})</span>
                 @endif
@@ -135,9 +135,9 @@
                 @endif
             @else
                 <div class="text-center py-12 text-base-content/60">
-                    <p>No sermons found.</p>
+                    <p>{{ __('No sermons found.') }}</p>
                     @if($hasFilters)
-                        <a href="" class="btn btn-ghost btn-sm mt-4">Clear Filters</a>
+                        <a href="" class="btn btn-ghost btn-sm mt-4">{{ __('Clear Filters') }}</a>
                     @endif
                 </div>
             @endif
@@ -147,9 +147,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                     </svg>
-                    All Speakers
+                    {{ __('All Speakers') }}
                 </a>
-                <a href="/sermons" class="btn btn-ghost gap-2">All Sermons</a>
+                <a href="/sermons" class="btn btn-ghost gap-2">{{ __('All Sermons') }}</a>
             </div>
         </div>
     </main>

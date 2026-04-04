@@ -1,5 +1,5 @@
 @php
-    $title = $blogPostTitle ?? 'Blog Post Title';
+    $title = $blogPostTitle ?? __('Blog Post Title');
     $image = $blogPostImage ?? null;
     $authorName = $blogPostAuthorName ?? '';
     $content = $blogPostContent ?? '';
@@ -11,12 +11,12 @@
     <main>
         @include('themes::components.default.dark-hero', [
             'heading' => $title,
-            'subheading' => $authorName ? "By {$authorName}" : null,
+            'subheading' => $authorName ? __('By :name', ['name' => $authorName]) : null,
             'image' => $image,
         ])
 
         @include('themes::components.default.breadcrumb', [
-            'parent' => 'Blog',
+            'parent' => __('Blog'),
             'parentUrl' => '/blog',
             'current' => $title,
         ])
@@ -26,7 +26,7 @@
                 <div class="prose prose-lg max-w-none">{!! markdown_to_html($content) !!}</div>
             @else
                 <div class="text-center py-12 text-base-content/40">
-                    <p>Add content to see it previewed here.</p>
+                    <p>{{ __('Add content to see it previewed here.') }}</p>
                 </div>
             @endif
         </div>

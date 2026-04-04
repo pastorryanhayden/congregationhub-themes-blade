@@ -6,9 +6,9 @@
     $links = collect($actionLinks)->filter(fn($l) => !empty($l['title']));
     if ($links->isEmpty()) {
         $links = collect([
-            ['title' => 'Plan Your Visit', 'subtitle' => 'Learn About Our Church'],
-            ['title' => 'Watch Live', 'subtitle' => 'View our Services'],
-            ['title' => 'Give Online', 'subtitle' => 'For Members'],
+            ['title' => __('Plan Your Visit'), 'subtitle' => __('Learn About Our Church')],
+            ['title' => __('Watch Live'), 'subtitle' => __('View our Services')],
+            ['title' => __('Give Online'), 'subtitle' => __('For Members')],
         ]);
     }
 

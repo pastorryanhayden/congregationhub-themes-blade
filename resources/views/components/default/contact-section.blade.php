@@ -10,8 +10,8 @@
 
 <section class="py-16 bg-primary text-primary-content">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
-        <p class="mb-8 max-w-2xl mx-auto">We would love to hear from you. Reach out to us anytime.</p>
+        <h2 class="text-3xl font-bold mb-4">{{ __('Get In Touch') }}</h2>
+        <p class="mb-8 max-w-2xl mx-auto">{{ __('We would love to hear from you. Reach out to us anytime.') }}</p>
 
         @if($hasContactInfo)
             <div class="flex flex-wrap justify-center gap-6 mb-8">
@@ -34,6 +34,6 @@
             </div>
         @endif
 
-        <a href="#" class="btn btn-secondary btn-lg">Contact Us</a>
+        <a href="#" class="btn btn-secondary btn-lg">{{ __('Contact Us') }}</a>
     </div>
 </section>
