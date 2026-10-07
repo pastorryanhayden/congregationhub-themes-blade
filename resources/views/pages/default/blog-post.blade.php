@@ -21,9 +21,9 @@
             'current' => $title,
         ])
 
-        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
             @if($content)
-                <div class="prose prose-lg max-w-none">{!! markdown_to_html($content) !!}</div>
+                @include('themes::components.default.long-content', ['content' => $content])
             @else
                 <div class="text-center py-12 text-base-content/40">
                     <p>{{ __('Add content to see it previewed here.') }}</p>
